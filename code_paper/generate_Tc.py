@@ -1,10 +1,12 @@
 import numpy as np
 import os
 
+
+
 T = '2.2691853'
 
 cmd = '~/Programming/ising/install/bin/ising -d 2 -L 20 -T {0} --nmeas 1000 --nmcs 40000000 --ieq 5000 --dyn 3 --print-state'.format(T)
-outfname = '../data_paper/configurations_wolff/configurations_Tc.npz'
+outfname = '../data_paper/configurations_Tc.npz'
 print(cmd)
 os.system(cmd)
     
