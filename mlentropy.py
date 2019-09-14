@@ -4,21 +4,23 @@ from sklearn.model_selection import KFold
 from xgboost import XGBClassifier
 
 
-def entropy_xgb(X, n_splits=5, verbose=True, compare=0, base2=True, eps=1e-8, gpu=True, **kwargs):
+
+def entropy_xgb(X, n_splits=5, verbose=True, compare=0, compare_method='grassberger', base2=True, eps=1e-8, gpu=False, **kwargs):
     if gpu:
         kwargs['tree_method'] = 'gpu_hist'
-        kwargs.setdefault('n_jobs', 4)
+        #kwargs.setdefault('n_jobs', 4)
     else:
         kwargs.setdefault('tree_method', 'hist')
         kwargs.setdefault('n_jobs', -1)
-    return entropy_ml(X, XGBClassifier, n_splits=n_splits, verbose=verbose, compare=compare, base2=base2, eps=eps, **kwargs)
+    return entropy_ml(X, XGBClassifier, n_splits=n_splits, verbose=verbose, compare=compare, compare_method=compare_method, base2=base2, eps=eps, **kwargs)
 
 
-def entropy_lr(X, n_splits=5, verbose=True, compare=0, base2=True, eps=1e-8, **kwargs):
-    return entropy_ml(X, LogisticRegression, n_splits=n_splits, verbose=verbose, compare=compare, base2=base2, eps=eps, **kwargs)
+def entropy_lr(X, n_splits=5, verbose=True, compare=0, compare_method='grassberger', base2=True, eps=1e-8, **kwargs):
+    kwargs.setdefault('solver', 'liblinear')
+    return entropy_ml(X, LogisticRegression, n_splits=n_splits, verbose=verbose, compare=compare, compare_method=compare_method, base2=base2, eps=eps, **kwargs)
 
 
-def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, base2=True, eps=1e-8, **kwargs):
+def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, compare_method='grassberger', base2=True, eps=1e-8, **kwargs):
 
     if base2:
         log = np.log2
@@ -52,16 +54,26 @@ def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, base2=Tr
             clf.fit(XX[tr],y[tr])
             p[tst] = clf.predict_proba(XX[tst])[:,1]
 
-        S += - np.mean(y*log(p+eps) + (1-y)*log(1-p)+eps)
+        S += - np.mean(y*log(p+eps) + (1-y)*log(1-p+eps))
 
         if verbose:
             if compare>i:
-                S_direct = entropy_histogram(X[:,:i+1], method='james-stein')
+                S_direct = entropy_histogram(X[:,:i+1], method=compare_method)
                 print('{} {:.3f} {:.5f} [{:.5f}]'.format(i+1, S, S/(i+1), S_direct/(i+1)))
             else:
                 print('{} {:.3f} {:.5f}'.format(i+1, S, S/(i+1)))
 
     return S
+
+# various entropy estimators based on histograms (the direct one is method='ml')
+
+from scipy.special import digamma
+
+def evenodd(h):
+    return 1 - 2*(h%2)
+
+def G(h):
+    return digamma(h)+0.5*evenodd(h)*(digamma((h+1)/2) - digamma(h/2))
 
 
 def get_counts_np(X):
@@ -95,4 +107,11 @@ def entropy_histogram(X, method='ml'):
         Spresent = -np.sum(thkShrink*np.log2(thkShrink))
         Smissing = -nmiss*( lm/p * np.log2(lm/p) )
         return Spresent + Smissing
+
+    if method=='miller-madow':
+        K = len(counts)
+        return -np.sum(thkML*np.log2(thkML)) +(K-1)/(2*n)/np.log(2)
+
+    if method=='grassberger':
+        return (np.log(n) - 1/n * np.sum(counts*G(counts)))/np.log(2)
 

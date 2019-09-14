@@ -2,7 +2,7 @@ import numpy as np
 import sys
 sys.path.append('..')
 
-from mlentropy import entropy_xgb
+from mlentropy import entropy_xgb, entropy_lr
 
 T = sys.argv[1]
 print('temperature', T)
@@ -12,7 +12,7 @@ def unpack(X, lastdim=20):
 
 Xb = unpack(np.load('../data_paper/configurations_{}.npz'.format(T))['arr_0'])
 
-Xb = Xb[:10000]
+Xb = Xb[:20000]
 
 X = 2.0*Xb - 1.0
 
@@ -28,7 +28,9 @@ print()
 print('energy', np.mean(en)/N, np.median(en)/N, 'std', np.std(en)/N, 'var', np.var(en)/N)
 print()
 
+np.random.seed(0)
 
-S = entropy_xgb(Xb, gpu=True, compare=10)
+S = entropy_xgb(Xb, gpu=False, compare=20)
+#S = entropy_lr(Xb, compare=10)
 print()
 print('entropy', S/N)
