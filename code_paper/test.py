@@ -2,7 +2,7 @@ import numpy as np
 import sys
 sys.path.append('..')
 
-from mlentropy import xgbentropy
+from mlentropy import entropy_xgb
 
 T = sys.argv[1]
 print('temperature', T)
@@ -29,6 +29,6 @@ print('energy', np.mean(en)/N, np.median(en)/N, 'std', np.std(en)/N, 'var', np.v
 print()
 
 
-S = xgbentropy(Xb, gpu=False)
+S = entropy_xgb(Xb, gpu=True, compare=10)
 print()
 print('entropy', S/N)
