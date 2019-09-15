@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Simulations on CIFAR10')
 
 parser.add_argument('-n', default=20000, type=int, help='use first n samples (default: 20000)')
 parser.add_argument('-k', default=5, type=int, help='number of cv folds (default: 5)')
-parser.add_argument('--depth', default=3, type=int, help='depth of trees (default: 3)')
+parser.add_argument('--depth', default=3, type=int, help='max depth of trees (default: 3)')
 parser.add_argument('--n-estimators', dest='n_estimators', default=100, type=int, help='number of trees (default: 100)')
 parser.add_argument('--order', default='natural', type=str, help='ordering: natural|maxcorr|meancorr|SEED (default: natural)')
 parser.add_argument('-T', default='Tc', type=str, help='temperature (1.0-4.0 every 0.1 or Tc)')
@@ -95,7 +95,7 @@ else:
 np.random.seed(0)
 
 t0 = time()
-S = entropy_xgb(Xb, compare=10)
+S = entropy_xgb(Xb, n_splits=args.k, compare=10, n_estimators=args.n_estimators, max_depth=args.depth)
 elapsed_min = (time()-t0)/60
 
 S = S/nf
