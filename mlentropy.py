@@ -58,7 +58,7 @@ def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, compare_
 
         if verbose:
             if compare>i:
-                S_direct = entropy_histogram(X[:,:i+1], method=compare_method)
+                S_direct = entropy_histogram(X[:,:i+1], method=compare_method, base2=base2)
                 print('{} {:.3f} {:.5f} [{:.5f}]'.format(i+1, S, S/(i+1), S_direct/(i+1)))
             else:
                 print('{} {:.3f} {:.5f}'.format(i+1, S, S/(i+1)))
@@ -85,18 +85,24 @@ def get_counts_np(X):
     _, counts = np.unique(Xb, return_counts=True)
     return counts, n, p
 
-def entropy_histogram(X, method='ml'):
+def entropy_histogram(X, method='ml', base2=True):
+
+    if base2:
+        cfbase = np.log(2)
+    else:
+        cfbase = 1.0
+
     counts, n, p = get_counts_np(X)
     thkML = counts/n
 
     if method=='ml':
-        return -np.sum(thkML*np.log2(thkML))
+        return -np.sum(thkML*np.log(thkML))/cfbase
 
     if method=='chao-shen':
         m1 = np.sum(counts==1)
         thkGT = (1 - m1/n)*thkML
         cf = 1/(1-(1-thkGT)**n)
-        return -np.sum(cf*thkGT*np.log2(thkGT))
+        return -np.sum(cf*thkGT*np.log(thkGT))/cfbase
 
     if method=='james-stein':
         tk = np.ones_like(counts)/p
@@ -104,14 +110,14 @@ def entropy_histogram(X, method='ml'):
         #print(p, nmiss/p)
         lm = (1 - np.sum(thkML**2))/((n-1) * (np.sum((tk - thkML)**2) + nmiss/p**2 ))
         thkShrink = lm*tk + (1-lm)*thkML
-        Spresent = -np.sum(thkShrink*np.log2(thkShrink))
-        Smissing = -nmiss*( lm/p * np.log2(lm/p) )
-        return Spresent + Smissing
+        Spresent = -np.sum(thkShrink*np.log(thkShrink))
+        Smissing = -nmiss*( lm/p * np.log(lm/p) )
+        return (Spresent + Smissing)/cfbase
 
     if method=='miller-madow':
         K = len(counts)
-        return -np.sum(thkML*np.log2(thkML)) +(K-1)/(2*n)/np.log(2)
+        return (-np.sum(thkML*np.log(thkML)) +(K-1)/(2*n))/cfbase
 
     if method=='grassberger':
-        return (np.log(n) - 1/n * np.sum(counts*G(counts)))/np.log(2)
+        return (np.log(n) - 1/n * np.sum(counts*G(counts)))/cfbase
 
