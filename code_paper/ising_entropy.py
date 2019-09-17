@@ -65,6 +65,8 @@ def unpack(X, lastdim=20):
 
 if args.T=='Tc':
     T = 2.2691853
+elif args.T[-4:]=='long':
+    T = float(args.T[:-4])
 else:
     T = float(args.T)
 
