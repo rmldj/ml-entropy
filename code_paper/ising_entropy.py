@@ -17,6 +17,7 @@ parser.add_argument('--n-estimators', dest='n_estimators', default=100, type=int
 parser.add_argument('--order', default='natural', type=str, help='ordering: natural|maxcorr|meancorr|SEED (default: natural)')
 parser.add_argument('-T', default='Tc', type=str, help='temperature (1.0-4.0 every 0.1 or Tc)')
 parser.add_argument('--log', default='ising_entropy', type=str, help='log file (default: ising_entropy)')
+parser.add_argument('--augment', action='store_true', help='augment by adding flipped configurations')
 
 args = parser.parse_args()
 
@@ -76,9 +77,17 @@ Xb = Xb[:args.n]
 
 energy, var_energy = energy_observables(Xb)
 
+if args.augment:
+    Xb1 = np.rot90(Xb, k=1, axes=(1,2))
+    Xb2 = np.rot90(Xb, k=2, axes=(1,2))
+    Xb3 = np.rot90(Xb, k=3, axes=(1,2))
+    Xb = np.concatenate((Xb, Xb1, Xb2, Xb3), axis=0)
+
 Xb = Xb.reshape((len(Xb),-1))
 nf = Xb.shape[1]
 
+print(Xb.shape)
+print()
 
 
 if args.order=='natural':
