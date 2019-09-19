@@ -26,10 +26,20 @@ with open('scan50.log') as f:
         varenergy[i] = data[3]
         print(data)
 
+entropyaug = np.zeros(n)
+freeaug = np.zeros(n)
+
+with open('scan50augment.log') as f:
+    for i, ln in enumerate(f):
+        _, data = ln.strip().split('|')
+        data = [float(s) for s in data.split()]
+        freeaug[i] = data[4]
+        entropyaug[i] = data[5]
 
 
 plt.figure()
 plt.plot(Ts, entropies20, 'k', label='exact L=20 2D Ising')
+plt.plot(Ts, entropyaug, 'mo', label='xgboost entropy augmented')
 plt.plot(Ts, entropy, 'ro', label='xgboost entropy')
 plt.xlabel('T')
 plt.ylabel('S')
@@ -51,6 +61,7 @@ plt.legend()
 
 plt.figure()
 plt.plot(Ts, free20, 'k', label='exact L=20 2D Ising')
+plt.plot(Ts, freeaug, 'mo', label='xgboost entropy augmented + MC energy')
 plt.plot(Ts, free, 'ro', label='xgboost entropy + MC energy')
 plt.xlabel('T')
 plt.ylabel('F')
