@@ -2,7 +2,7 @@
 
 Code for the paper 
 
-*Entropy from Machine Learning*
+## Romuald A. Janik, *Entropy from Machine Learning*
 
 as well as a routine implementing the proposed method of computing entropy. Please cite the paper if you would use this method in a scientific publication.
 
