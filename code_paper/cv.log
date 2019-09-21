@@ -1,0 +1,4 @@
+ising_entropy.py --order 0 --log cv --n-estimators 50 -k 2 | Tc 2.2691853 -1.44486 8.26344 -2.12018 0.42935 2.68
+ising_entropy.py --order 0 --log cv --n-estimators 50 -k 3 | Tc 2.2691853 -1.44486 8.26344 -2.11894 0.42857 5.20
+ising_entropy.py --order 0 --log cv --n-estimators 50 -k 4 | Tc 2.2691853 -1.44486 8.26344 -2.11850 0.42829 7.34
+ising_entropy.py --order 0 --log cv --n-estimators 50 -k 5 | Tc 2.2691853 -1.44486 8.26344 -2.11829 0.42815 9.05

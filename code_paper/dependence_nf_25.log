@@ -1,0 +1,10 @@
+NOT  lr        50.22 time: 0.11
+NOT  xgb       50.30 time: 0.55
+OR   lr        50.40 time: 0.21
+OR   xgb       50.29 time: 0.59
+AND  lr        50.40 time: 0.16
+AND  xgb       50.27 time: 0.59
+XOR  lr        75.25 time: 0.10
+XOR  xgb       54.94 time: 0.72
+XOR  xgb(200)  51.79 time: 1.34
+XOR  xgb(400)  50.96 time: 2.38

@@ -1,0 +1,24 @@
+ising_entropy.py --log order --n-estimators 50 --order natural | Tc 2.2691853 -1.44486 8.26344 -2.11838 0.42821 8.27
+ising_entropy.py --log order --n-estimators 50 --order maxcorr | Tc 2.2691853 -1.44486 8.26344 -2.11833 0.42818 8.37
+ising_entropy.py --log order --n-estimators 50 --order mincorr | Tc 2.2691853 -1.44486 8.26344 -2.11836 0.42820 8.35
+ising_entropy.py --log order --n-estimators 50 --order 0 | Tc 2.2691853 -1.44486 8.26344 -2.11829 0.42815 8.31
+ising_entropy.py --log order --n-estimators 50 --order 137 | Tc 2.2691853 -1.44486 8.26344 -2.11830 0.42816 8.99
+ising_entropy.py --log order --n-estimators 50 --order 555 | Tc 2.2691853 -1.44486 8.26344 -2.11820 0.42810 8.91
+ising_entropy.py --log order --n-estimators 50 --order 1621 | Tc 2.2691853 -1.44486 8.26344 -2.11823 0.42812 9.30
+ising_entropy.py --log order --n-estimators 50 --order 4567 | Tc 2.2691853 -1.44486 8.26344 -2.11831 0.42817 9.27
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order natural | 1.5 1.5 -1.95108 0.44113 -2.00991 0.05658 4.46
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order maxcorr | 1.5 1.5 -1.95108 0.44113 -2.00995 0.05662 4.51
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order mincorr | 1.5 1.5 -1.95108 0.44113 -2.01006 0.05673 4.65
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order 0 | 1.5 1.5 -1.95108 0.44113 -2.01000 0.05668 4.67
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order 137 | 1.5 1.5 -1.95108 0.44113 -2.01002 0.05669 4.87
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order 555 | 1.5 1.5 -1.95108 0.44113 -2.01003 0.05670 4.27
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order 1621 | 1.5 1.5 -1.95108 0.44113 -2.01004 0.05671 4.13
+ising_entropy.py -T 1.5 --log order --n-estimators 50 --order 4567 | 1.5 1.5 -1.95108 0.44113 -2.01002 0.05669 4.09
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order natural | 3.5 3.5 -0.66112 3.01456 -2.73845 0.85628 9.16
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order maxcorr | 3.5 3.5 -0.66112 3.01456 -2.73845 0.85627 10.07
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order mincorr | 3.5 3.5 -0.66112 3.01456 -2.73930 0.85663 9.92
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order 0 | 3.5 3.5 -0.66112 3.01456 -2.73918 0.85657 9.79
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order 137 | 3.5 3.5 -0.66112 3.01456 -2.73914 0.85656 9.91
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order 555 | 3.5 3.5 -0.66112 3.01456 -2.73925 0.85660 10.30
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order 1621 | 3.5 3.5 -0.66112 3.01456 -2.73925 0.85660 9.96
+ising_entropy.py -T 3.5 --log order --n-estimators 50 --order 4567 | 3.5 3.5 -0.66112 3.01456 -2.73930 0.85663 9.61

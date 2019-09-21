@@ -1,0 +1,7 @@
+ising_entropy.py --order 0 --log hyper --depth 3 --n-estimators 100 | Tc 2.2691853 -1.44486 8.26344 -2.12057 0.42960 21.00
+ising_entropy.py --order 0 --log hyper --depth 3 --n-estimators 200 | Tc 2.2691853 -1.44486 8.26344 -2.12639 0.43330 38.69
+ising_entropy.py --order 0 --log hyper --depth 5 --n-estimators 100 | Tc 2.2691853 -1.44486 8.26344 -2.13512 0.43885 37.22
+ising_entropy.py --order 0 --log hyper --depth 5 --n-estimators 200 | Tc 2.2691853 -1.44486 8.26344 -2.15574 0.45196 71.18
+ising_entropy.py --order 0 --log hyper --depth 3 --n-estimators 50 | Tc 2.2691853 -1.44486 8.26344 -2.11829 0.42815 12.07
+ising_entropy.py --order 0 --log hyper --depth 3 --n-estimators 25 | Tc 2.2691853 -1.44486 8.26344 -2.13890 0.44125 7.69
+ising_entropy.py --order 0 --log hyper --depth 3 --n-estimators 75 | Tc 2.2691853 -1.44486 8.26344 -2.11911 0.42868 16.50
