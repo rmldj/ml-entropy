@@ -30,7 +30,7 @@ X2 = np.random.binomial(1, 0.5, size=(n,nf))
 print(X1.shape, X1.dtype, np.unique(X1, return_counts=True), np.mean(X1))
 print(X2.shape, X2.dtype, np.unique(X2, return_counts=True), np.mean(X2))
 
-X3 = X1
+X3 = np.logical_not(X1).astype(int)
 X4 = np.logical_or(X1, X2).astype(int)
 X5 = np.logical_and(X1, X2).astype(int)
 X6 = np.logical_xor(X1, X2).astype(int)
@@ -41,22 +41,22 @@ print(X5.shape, X5.dtype, np.unique(X5, return_counts=True), np.mean(X5))
 print(X6.shape, X6.dtype, np.unique(X6, return_counts=True), np.mean(X6))
 print()
 
-X_copy = np.concatenate((X1, X2, X3), axis=1)[:, permutation]
+X_not = np.concatenate((X1, X2, X3), axis=1)[:, permutation]
 X_or = np.concatenate((X1, X2, X4), axis=1)[:, permutation]
 X_and = np.concatenate((X1, X2, X5), axis=1)[:, permutation]
 X_xor = np.concatenate((X1, X2, X6), axis=1)[:, permutation]
 
 np.random.seed(0)
 t0 = time()
-S_copy_lr = entropy_lr(X_copy)
+S_not_lr = entropy_lr(X_not)
 elapsed_min = (time()-t0)/60
-logging.info('COPY lr        {:.2f} time: {:.2f}'.format(S_copy_lr, elapsed_min))
+logging.info('NOT  lr        {:.2f} time: {:.2f}'.format(S_not_lr, elapsed_min))
 
 np.random.seed(0)
 t0 = time()
-S_copy_xgb = entropy_xgb(X_copy)
+S_not_xgb = entropy_xgb(X_not)
 elapsed_min = (time()-t0)/60
-logging.info('COPY xgb       {:.2f} time: {:.2f}'.format(S_copy_xgb, elapsed_min))
+logging.info('NOT  xgb       {:.2f} time: {:.2f}'.format(S_not_xgb, elapsed_min))
 
 
 np.random.seed(0)
