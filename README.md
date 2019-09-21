@@ -34,7 +34,7 @@ The parameters are as follows:
 * `compare=n` in addition prints out entropy per spin computed directly from histograms for the first `n` subsets
 * `compare_method='grassberger'` uses a specific variant of entropy estimation from a histogram
 * `base2=True` returns entropy in bits
-* `eps=1e-8` constant to add to argument of logarithms to avoid *NaN* when probability is 0 or 1
+* `eps=1e-8` constant to add to the argument of logarithms to avoid *NaN* when probability is 0 or 1
 * `gpu=False` (only for **xgboost**) whether to use GPU
 
 The remaining keyword arguments are directly passed to the constructor of the classifier.
@@ -47,5 +47,5 @@ In addition
 ```
 def entropy_histogram(X, method='ml', base2=True):
 ```
-contains routines for estimating entropy from histogram (occurence counts) using `ml` (maximal likelihood), `chao-shen`,
+contains routines for estimating entropy from histograms (occurence counts) using `ml` (maximal likelihood), `chao-shen`,
 `james-stein`, `miller-madow` and `grassberger` methods. Note that these have not been thoroughly tested.
