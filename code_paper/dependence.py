@@ -105,7 +105,7 @@ logging.info('XOR  xgb(200)  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min)
 
 np.random.seed(0)
 t0 = time()
-S_xor_xgb = entropy_xgb(X_xor, n_estimators=300)
+S_xor_xgb = entropy_xgb(X_xor, n_estimators=400)
 elapsed_min = (time()-t0)/60
-logging.info('XOR  xgb(300)  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
+logging.info('XOR  xgb(400)  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
 
