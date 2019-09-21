@@ -1,0 +1,1 @@
+ising_entropy.py --order 0 --logreg --log logreg | Tc 2.2691853 -1.44486 8.26344 -2.12934 0.43518 7.87
