@@ -6,14 +6,21 @@ sys.path.append('..')
 
 from mlentropy import entropy_xgb, entropy_lr
 
-logging.basicConfig(filename='dependence.log', format='%(message)s', level=logging.DEBUG)
+if len(sys.argv)<2:
+    print('usage: python dependence.py nf')
+    quit()
+
+nf = int(sys.argv[1])
+
+
+logging.basicConfig(filename='dependence_nf_{}.log'.format(nf), format='%(message)s', level=logging.DEBUG)
 
 
 np.random.seed(0)
 
 
 n = 10000
-nf = 25
+
 
 permutation = np.random.permutation(3*nf)
 
@@ -41,53 +48,64 @@ X_xor = np.concatenate((X1, X2, X6), axis=1)[:, permutation]
 
 np.random.seed(0)
 t0 = time()
-S_copy_xgb = entropy_xgb(X_copy)
-elapsed_min = (time()-t0)/60
-logging.info('COPY xgb  {:.2f} time: {:.2f}'.format(S_copy_xgb, elapsed_min))
-
-np.random.seed(0)
-t0 = time()
 S_copy_lr = entropy_lr(X_copy)
 elapsed_min = (time()-t0)/60
-logging.info('COPY lr   {:.2f} time: {:.2f}'.format(S_copy_lr, elapsed_min))
-
+logging.info('COPY lr        {:.2f} time: {:.2f}'.format(S_copy_lr, elapsed_min))
 
 np.random.seed(0)
 t0 = time()
-S_or_xgb = entropy_xgb(X_or)
+S_copy_xgb = entropy_xgb(X_copy)
 elapsed_min = (time()-t0)/60
-logging.info('OR   xgb  {:.2f} time: {:.2f}'.format(S_or_xgb, elapsed_min))
+logging.info('COPY xgb       {:.2f} time: {:.2f}'.format(S_copy_xgb, elapsed_min))
+
 
 np.random.seed(0)
 t0 = time()
 S_or_lr = entropy_lr(X_or)
 elapsed_min = (time()-t0)/60
-logging.info('OR   lr   {:.2f} time: {:.2f}'.format(S_or_lr, elapsed_min))
-
+logging.info('OR   lr        {:.2f} time: {:.2f}'.format(S_or_lr, elapsed_min))
 
 np.random.seed(0)
 t0 = time()
-S_and_xgb = entropy_xgb(X_and)
+S_or_xgb = entropy_xgb(X_or)
 elapsed_min = (time()-t0)/60
-logging.info('AND  xgb  {:.2f} time: {:.2f}'.format(S_and_xgb, elapsed_min))
+logging.info('OR   xgb       {:.2f} time: {:.2f}'.format(S_or_xgb, elapsed_min))
+
 
 np.random.seed(0)
 t0 = time()
 S_and_lr = entropy_lr(X_and)
 elapsed_min = (time()-t0)/60
-logging.info('AND  lr   {:.2f} time: {:.2f}'.format(S_and_lr, elapsed_min))
-
+logging.info('AND  lr        {:.2f} time: {:.2f}'.format(S_and_lr, elapsed_min))
 
 np.random.seed(0)
 t0 = time()
-S_xor_xgb = entropy_xgb(X_xor)
+S_and_xgb = entropy_xgb(X_and)
 elapsed_min = (time()-t0)/60
-logging.info('XOR  xgb  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
+logging.info('AND  xgb       {:.2f} time: {:.2f}'.format(S_and_xgb, elapsed_min))
+
 
 np.random.seed(0)
 t0 = time()
 S_xor_lr = entropy_lr(X_xor)
 elapsed_min = (time()-t0)/60
-logging.info('XOR  lr   {:.2f} time: {:.2f}'.format(S_xor_lr, elapsed_min))
+logging.info('XOR  lr        {:.2f} time: {:.2f}'.format(S_xor_lr, elapsed_min))
 
+np.random.seed(0)
+t0 = time()
+S_xor_xgb = entropy_xgb(X_xor)
+elapsed_min = (time()-t0)/60
+logging.info('XOR  xgb       {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
+
+np.random.seed(0)
+t0 = time()
+S_xor_xgb = entropy_xgb(X_xor, n_estimators=200)
+elapsed_min = (time()-t0)/60
+logging.info('XOR  xgb(200)  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
+
+np.random.seed(0)
+t0 = time()
+S_xor_xgb = entropy_xgb(X_xor, n_estimators=300)
+elapsed_min = (time()-t0)/60
+logging.info('XOR  xgb(300)  {:.2f} time: {:.2f}'.format(S_xor_xgb, elapsed_min))
 
