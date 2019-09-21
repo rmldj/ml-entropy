@@ -6,6 +6,11 @@
 
 The configurations were generated using `code_paper/generate_all_glauber.py` and `code_paper/generate_Tc_glauber.py` in the repository [github.com/rmldj/ml-entropy](https://github.com/rmldj/ml-entropy), which in turn used [github.com/rmldj/ising](https://github.com/rmldj/ising).
 
+## Download data
+
+The generated Monte Carlo configurations can be downloaded from Zenodo (link to appear).
+
+
 ## Data format
 
 The numpy arrays are in the packed bits format. They should be read in as follows:
