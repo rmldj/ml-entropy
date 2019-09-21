@@ -9,6 +9,7 @@ The configurations were generated using `code_paper/generate_all_glauber.py` and
 ## Download data
 
 The generated Monte Carlo configurations can be downloaded from Zenodo (link to appear).
+Unpack the downloaded data in this folder.
 
 
 ## Data format
