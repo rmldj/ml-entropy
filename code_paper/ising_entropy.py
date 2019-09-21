@@ -8,7 +8,7 @@ sys.path.append('..')
 from mlentropy import entropy_xgb, entropy_lr
 
 
-parser = argparse.ArgumentParser(description='Simulations on CIFAR10')
+parser = argparse.ArgumentParser(description='2D Ising entropy estimation')
 
 parser.add_argument('-n', default=20000, type=int, help='use first n samples (default: 20000)')
 parser.add_argument('-k', default=5, type=int, help='number of cv folds (default: 5)')
@@ -18,6 +18,7 @@ parser.add_argument('--order', default='natural', type=str, help='ordering: natu
 parser.add_argument('-T', default='Tc', type=str, help='temperature (1.0-4.0 every 0.1 or Tc)')
 parser.add_argument('--log', default='ising_entropy', type=str, help='log file (default: ising_entropy)')
 parser.add_argument('--augment', action='store_true', help='augment by adding flipped configurations')
+parser.add_argument('--logreg', action='store_true', help='use logistic regression')
 
 args = parser.parse_args()
 
@@ -106,7 +107,10 @@ else:
 np.random.seed(0)
 
 t0 = time()
-S = entropy_xgb(Xb, n_splits=args.k, compare=10, n_estimators=args.n_estimators, max_depth=args.depth)
+if args.logreg:
+    S = entropy_lr(Xb, n_splits=args.k, compare=10)
+else:
+    S = entropy_xgb(Xb, n_splits=args.k, compare=10, n_estimators=args.n_estimators, max_depth=args.depth)
 elapsed_min = (time()-t0)/60
 
 S = S/nf
