@@ -1,4 +1,4 @@
-# Instructions for reproducing results
+# Instructions for reproducing results in the paper
 
 ## NOT, OR, AND, XOR dataset results
 
