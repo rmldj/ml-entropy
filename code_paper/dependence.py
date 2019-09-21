@@ -13,7 +13,7 @@ np.random.seed(0)
 
 
 n = 10000
-nf = 50
+nf = 25
 
 permutation = np.random.permutation(3*nf)
 
