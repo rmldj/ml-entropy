@@ -6,11 +6,11 @@ Code for the paper
 
 as well as a routine implementing the proposed method of computing entropy. Please cite the paper if you would use this method in a scientific publication.
 
-See the `code_paper/README.md` for specific instructions for reproducing the results of the paper
+See the README file in the `code_paper/` folder for specific instructions for reproducing the results of the paper
 
 ## `mlentropy.py`
 
-This file implements the basic procedures proposed in the paper for computing the entropy.
+This file implements the basic procedures proposed in the paper for computing the entropy. It requires `xgboost`, `scikit-learn`, `scipy` and `numpy`.
 
 The main functions are
 ```
