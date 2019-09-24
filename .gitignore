@@ -1,5 +1,5 @@
 *.npz
 *.pyc
 .vscode
-
+*.zip
 
