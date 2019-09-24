@@ -1,10 +1,10 @@
-# Ising model configurations
+# Ising model Monte Carlo configurations
 
 * 20000 configurations of the 2D Ising model on a periodic 20x20 lattice generated for the range of temperatures T=1.0 to T=4.0.
 
 * 40000 configurations at T=Tc
 
-The configurations were generated using `code_paper/generate_all_glauber.py` and `code_paper/generate_Tc_glauber.py` in the repository [github.com/rmldj/ml-entropy](https://github.com/rmldj/ml-entropy), which in turn used [github.com/rmldj/ising](https://github.com/rmldj/ising).
+The configurations were generated using the `code_paper/generate_all_glauber.py` and `code_paper/generate_Tc_glauber.py` scripts in the repository [github.com/rmldj/ml-entropy](https://github.com/rmldj/ml-entropy), which in turn used [github.com/rmldj/ising](https://github.com/rmldj/ising).
 
 ## Download data
 
