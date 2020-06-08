@@ -6,6 +6,9 @@ Code for the paper
 
 as well as a routine implementing the proposed method of computing entropy. Please cite the paper if you would use this method in a scientific publication.
 
+**UPDATE:** The current version of `mlentropy.py` implements improvements for handling cases with extremely unbalanced data. The results of the paper where computed using the earlier version (choose tag 1.0).
+
+
 See the README file in the `code_paper/` folder for specific instructions for reproducing the results of the paper
 
 ## `mlentropy.py`

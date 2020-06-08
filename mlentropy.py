@@ -32,7 +32,7 @@ def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, compare_
     nf = X.shape[1]
     
     p = np.mean(X[:,0])
-    S = -p*log(p+eps) - (1-p)*log(1-p+eps)
+    S = np.nan_to_num(-p*log(p) - (1-p)*log(1-p))
 
     if verbose:
         if compare>0:
@@ -49,17 +49,23 @@ def entropy_ml(X, ClassifierClass, n_splits=5, verbose=True, compare=0, compare_
         # the splits are different for each fitted feature
         # for reproducibility set np.random.seed(SEED) before calling mlentropy/xgbentropy etc.
 
+        degenerate = False
         for tr, tst in kf.split(XX):
+            if (np.sum(y[tr]==0)==0 or np.sum(y[tr]==1)==0):
+                degenerate = True
+                break
             clf = ClassifierClass(**kwargs)
             clf.fit(XX[tr],y[tr])
             p[tst] = clf.predict_proba(XX[tst])[:,1]
 
-        S += - np.mean(y*log(p+eps) + (1-y)*log(1-p+eps))
+        if not degenerate:
+            S += - np.mean(np.nan_to_num(y*log(p) + (1-y)*log(1-p)))
 
         if verbose:
             if compare>i:
                 S_direct = entropy_histogram(X[:,:i+1], method=compare_method, base2=base2)
                 print('{} {:.3f} {:.5f} [{:.5f}]'.format(i+1, S, S/(i+1), S_direct/(i+1)))
+                #print(np.mean(p), np.std(p))
             else:
                 print('{} {:.3f} {:.5f}'.format(i+1, S, S/(i+1)))
 
